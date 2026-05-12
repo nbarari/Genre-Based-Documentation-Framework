@@ -86,7 +86,11 @@ You are a component of the GBDF State Machine. Enforce the protocol:
 
 ```bash
 #!/usr/bin/env bash
+# GBDF v1.1 Initializer
+
 mkdir -p docs/{architecture,decisions,conventions,roadmap,runbooks,incidents,reference,research/archive}
+
+# Seed the Anchor
 cat <<EOF > SPEC.md
 # TECHNICAL SPECIFICATION (The Anchor)
 ---
@@ -96,20 +100,27 @@ status: Stable
 ## 1. Technical Invariants
 - 
 ## 2. Definition of Done (DoD)
-1. Code matches Snapshot (/architecture).
-2. Snapshot reflects Decision (/decisions).
-3. Passing CLI Validator provided.
+- Code matches Snapshot (/architecture).
+- Snapshot reflects Decision (/decisions).
+- Passing Validator command provided.
 EOF
 
-cat <<EOF > CONTRIBUTING.md
-# CONTRIBUTING
-## The Sync Protocol
-- PRs adding 'Accepted' Decisions MUST update the Snapshot/Anchor.
-- Old logic MUST be excised from Snapshots.
-- No code merged on 'Proposed' ADRs.
+# Seed the ADR Template for the AI
+cat <<EOF > docs/decisions/template.md
+# YYYY-MM-DD: Title
+---
+genre: Transaction
+status: Proposed
+impacts: []
+---
+## Context
+## Decision
+## Consequences
 EOF
 
+# Initialize Roadmap
 echo "# Execution Order" > docs/roadmap/execution-order.md
 echo "1. [x] Capability: Protocol Initialization" >> docs/roadmap/execution-order.md
+
 git init && git add . && git commit -m "chore: initialize GBDF State Engine"
-```
+echo "✅ GBDF State Engine initialized. Ready for Human-AI collaboration."

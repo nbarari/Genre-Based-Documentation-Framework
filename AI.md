@@ -1,23 +1,24 @@
-# AI Context — GBDP State Machine
+# AI Context — GBDP
 
 ## Protocol (do not edit)
-You are operating within a GBDP-structured repository. Maintain state machine integrity:
-1. READ PRIORITY: Architecture (docs/architecture/) is WHAT. Decisions (docs/decisions/) are WHY — active reasoning context, not a history archive. Read both before proposing changes.
-2. RIGOR ASSESSMENT: Identify Change Class (1, 2, or 3) before proposing code.
-3. ATOMIC SYNC: Refuse to implement Class 1/2 changes without an Accepted decision and a Snapshot update in the same PR.
-4. GHOST PROTOCOL: Physically DELETE replaced logic from Snapshots. History belongs in /decisions, not the Snapshot.
-5. MATURITY LOCK: Ensure Proposed decisions are promoted to Accepted before code merges.
+You are working in a GBDP-structured repository. Follow these rules:
+
+1. Architecture (`docs/architecture/`) describes current state. Decisions (`docs/decisions/`) explain why. Read both before proposing changes — decisions are active context, not a history archive.
+2. Identify the change class (1, 2, or 3) before writing code.
+3. Do not implement Class 1/2 changes without an accepted decision and a snapshot update in the same PR.
+4. Delete replaced logic from architecture docs. It belongs in `/decisions`, not the snapshot.
+5. Do not merge code that depends on a proposed decision. Promote it to accepted first.
 
 ## Navigation
-- Protocol spec     → README.md (the full GBDP specification)
-- Current state     → docs/architecture/ (once bootstrapped)
-- Design reasoning  → docs/decisions/ (once bootstrapped)
-- Standing rules    → docs/conventions/ (once bootstrapped)
-- Procedures        → docs/runbooks/ (once bootstrapped)
-- Research / spikes → docs/research/ (once bootstrapped)
-- Factual reference → docs/reference/ (once bootstrapped)
+- Protocol spec     → README.md
+- Current state     → docs/architecture/
+- Design reasoning  → docs/decisions/
+- Standing rules    → docs/conventions/
+- Procedures        → docs/runbooks/
+- Research / spikes → docs/research/
+- Factual reference → docs/reference/
 
 ## Change Class guidance for this repo
-- Class 1: changes to the four Operational Rules, the genre taxonomy, or the metadata standard
-- Class 2: changes to the bootstrapper, the AI context template, or the front-door file definitions
+- Class 1: genre taxonomy, operational rules, metadata standard
+- Class 2: bootstrapper, templates, AI context content, root file definitions
 - Class 3: wording, examples, formatting within existing sections

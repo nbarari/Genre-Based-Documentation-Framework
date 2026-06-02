@@ -120,15 +120,16 @@ If symlinks are unsuitable, a `make ai-sync` target that copies the file achieve
 `AI.md` has two sections: the **Protocol** (fixed — copy verbatim from GBDP and do not edit) and the **Navigation** (fill in per project after bootstrapping).
 
 ```markdown
-# AI Context — GBDP State Machine
+# AI Context — GBDP
 
 ## Protocol (do not edit)
-You are operating within a GBDP-structured repository. Maintain state machine integrity:
-1. READ PRIORITY: Architecture (docs/architecture/) is WHAT. Decisions (docs/decisions/) are WHY — active reasoning context, not a history archive. Read both before proposing changes.
-2. RIGOR ASSESSMENT: Identify Change Class (1, 2, or 3) before proposing code.
-3. ATOMIC SYNC: Refuse to implement Class 1/2 changes without an Accepted decision and a Snapshot update in the same PR.
-4. GHOST PROTOCOL: Physically DELETE replaced logic from Snapshots. History belongs in /decisions, not the Snapshot.
-5. MATURITY LOCK: Ensure Proposed decisions are promoted to Accepted before code merges.
+You are working in a GBDP-structured repository. Follow these rules:
+
+1. Architecture (docs/architecture/) describes current state. Decisions (docs/decisions/) explain why. Read both before proposing changes — decisions are active context, not a history archive.
+2. Identify the change class (1, 2, or 3) before writing code.
+3. Do not implement Class 1/2 changes without an accepted decision and a snapshot update in the same PR.
+4. Delete replaced logic from architecture docs. It belongs in /decisions, not the snapshot.
+5. Do not merge code that depends on a proposed decision. Promote it to accepted first.
 
 ## Navigation (fill in per project)
 - Current state     → docs/architecture/
@@ -209,15 +210,16 @@ EOF
 
 # AI context
 cat <<'EOF' > AI.md
-# AI Context — GBDP State Machine
+# AI Context — GBDP
 
 ## Protocol (do not edit)
-You are operating within a GBDP-structured repository. Maintain state machine integrity:
-1. READ PRIORITY: Architecture (docs/architecture/) is WHAT. Decisions (docs/decisions/) are WHY — active reasoning context, not a history archive. Read both before proposing changes.
-2. RIGOR ASSESSMENT: Identify Change Class (1, 2, or 3) before proposing code.
-3. ATOMIC SYNC: Refuse to implement Class 1/2 changes without an Accepted decision and a Snapshot update in the same PR.
-4. GHOST PROTOCOL: Physically DELETE replaced logic from Snapshots. History belongs in /decisions, not the Snapshot.
-5. MATURITY LOCK: Ensure Proposed decisions are promoted to Accepted before code merges.
+You are working in a GBDP-structured repository. Follow these rules:
+
+1. Architecture (docs/architecture/) describes current state. Decisions (docs/decisions/) explain why. Read both before proposing changes — decisions are active context, not a history archive.
+2. Identify the change class (1, 2, or 3) before writing code.
+3. Do not implement Class 1/2 changes without an accepted decision and a snapshot update in the same PR.
+4. Delete replaced logic from architecture docs. It belongs in /decisions, not the snapshot.
+5. Do not merge code that depends on a proposed decision. Promote it to accepted first.
 
 ## Navigation (fill in per project)
 - Current state     → docs/architecture/

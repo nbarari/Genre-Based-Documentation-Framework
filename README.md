@@ -86,17 +86,45 @@ validator: [CLI command or persistent Artifact link]
 
 ---
 
-## 6. AI Identity (System Instructions)
-*Paste this into `.cursorrules`, `CLAUDE.md`, or your AI System Prompt.*
+## 6. AI Context
+
+The canonical AI context lives in `AI.md` at the repo root. The bootstrapper generates this file. Wire it once to your tool — all tools read the same content from the same source.
+
+### Wiring `AI.md` to your tool
+
+| Tool | Command |
+| :--- | :--- |
+| **Claude Code** | `ln -s AI.md CLAUDE.md` |
+| **Cursor** | `ln -s AI.md .cursorrules` |
+| **GitHub Copilot** | `ln -s AI.md .github/copilot-instructions.md` |
+| **Windsurf** | `ln -s AI.md .windsurfrules` |
+| **Aider** | Add `--read AI.md` to `.aider.conf.yml` |
+| **Any tool** | Paste contents into the system prompt |
+
+If symlinks are unsuitable, a `make ai-sync` target that copies the file achieves the same result.
+
+### Content shape
+
+`AI.md` has two sections: the **Protocol** (fixed — copy verbatim from GBDP and do not edit) and the **Navigation** (fill in per project after bootstrapping).
 
 ```markdown
-# Role: Principal System Architect
-You are a component of the GBDP State Machine. Maintain integrity:
-1. READ PRIORITY: Use docs/architecture/ for state. Use docs/decisions/ only for history.
-2. RIGOR ASSESSMENT: Identify Change Class (1, 2, or 3) before proposing code. 
-3. ATOMIC SYNC: Refuse to implement Class 1/2 changes without an 'Accepted' ADR and a Snapshot update.
-4. GHOST PROTOCOL: Physically DELETE replaced logic from Snapshots.
-5. MATURITY LOCK: Ensure 'Proposed' ADRs are promoted to 'Accepted' if code is merged.
+# AI Context — GBDP State Machine
+
+## Protocol (do not edit)
+You are operating within a GBDP-structured repository. Maintain state machine integrity:
+1. READ PRIORITY: Architecture (docs/architecture/) is WHAT. Decisions (docs/decisions/) are WHY — active reasoning context, not a history archive. Read both before proposing changes.
+2. RIGOR ASSESSMENT: Identify Change Class (1, 2, or 3) before proposing code.
+3. ATOMIC SYNC: Refuse to implement Class 1/2 changes without an Accepted decision and a Snapshot update in the same PR.
+4. GHOST PROTOCOL: Physically DELETE replaced logic from Snapshots. History belongs in /decisions, not the Snapshot.
+5. MATURITY LOCK: Ensure Proposed decisions are promoted to Accepted before code merges.
+
+## Navigation (fill in per project)
+- Current state     → docs/architecture/
+- Design reasoning  → docs/decisions/
+- Standing rules    → docs/conventions/
+- Procedures        → docs/runbooks/
+- Research / spikes → docs/research/
+- Factual reference → docs/reference/
 ```
 
 ---
@@ -148,6 +176,33 @@ EOF
 # Initialize the Playlist
 echo "# Execution Order" > docs/roadmap/execution-order.md
 echo "1. [x] Capability: Protocol Initialization" >> docs/roadmap/execution-order.md
+
+# Initialize the AI context
+cat <<'EOF' > AI.md
+# AI Context — GBDP State Machine
+
+## Protocol (do not edit)
+You are operating within a GBDP-structured repository. Maintain state machine integrity:
+1. READ PRIORITY: Architecture (docs/architecture/) is WHAT. Decisions (docs/decisions/) are WHY — active reasoning context, not a history archive. Read both before proposing changes.
+2. RIGOR ASSESSMENT: Identify Change Class (1, 2, or 3) before proposing code.
+3. ATOMIC SYNC: Refuse to implement Class 1/2 changes without an Accepted decision and a Snapshot update in the same PR.
+4. GHOST PROTOCOL: Physically DELETE replaced logic from Snapshots. History belongs in /decisions, not the Snapshot.
+5. MATURITY LOCK: Ensure Proposed decisions are promoted to Accepted before code merges.
+
+## Navigation (fill in per project)
+- Current state     → docs/architecture/
+- Design reasoning  → docs/decisions/
+- Standing rules    → docs/conventions/
+- Procedures        → docs/runbooks/
+- Research / spikes → docs/research/
+- Factual reference → docs/reference/
+EOF
+
+# Wire AI.md to your tool (uncomment one):
+# ln -s AI.md CLAUDE.md                             # Claude Code
+# ln -s AI.md .cursorrules                          # Cursor
+# ln -s AI.md .github/copilot-instructions.md       # GitHub Copilot
+# ln -s AI.md .windsurfrules                        # Windsurf
 
 git init && git add . && git commit -m "chore: initialize GBDP state engine"
 ```
